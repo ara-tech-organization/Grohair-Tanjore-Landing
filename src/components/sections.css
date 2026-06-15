@@ -40,6 +40,11 @@
   gap: 16px;
 }
 
+.hp-mobile-stage,
+.hp-slider-controls {
+  display: none;
+}
+
 @media (min-width: 600px) {
   .hp-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -98,11 +103,6 @@
     font-weight: 600;
     color: #6b7280;
   }
-}
-
-.hp-mobile-stage,
-.hp-slider-controls {
-  display: none;
 }
 
 /* ────────────────────────────────────────────────────────
