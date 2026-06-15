@@ -1,0 +1,241 @@
+/* ── Navbar shell ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* ── Constrained inner wrapper ── */
+.navbar-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Main row: logo | links | cta ── */
+.navbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 16px;
+}
+
+/* ── Logo ── */
+.navbar-logo-link {
+  flex-shrink: 0;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.navbar-logo {
+  width: 130px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .navbar-logo { width: 160px; }
+}
+
+/* ── Desktop nav list ── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  color: #374151;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-link-btn:hover {
+  color: #C81C2E;
+  background: rgba(200, 28, 46, 0.06);
+}
+
+/* ── Dropdown ── */
+.nav-dropdown-wrap {
+  position: relative;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid #f0f0f0;
+  padding: 6px 0;
+  z-index: 1001;
+  animation: scaleIn 0.18s ease both;
+  transform-origin: top left;
+}
+
+.nav-dropdown-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  color: #374151;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-dropdown-btn:hover {
+  background: rgba(200, 28, 46, 0.05);
+  color: #C81C2E;
+}
+
+/* ── Desktop CTA area ── */
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.nav-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #374151;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.nav-phone-link:hover { color: #C81C2E; }
+
+/* ── Hamburger (hidden on desktop) ── */
+.nav-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #374151;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.nav-hamburger:hover {
+  background: rgba(200, 28, 46, 0.06);
+  color: #C81C2E;
+}
+
+/* ── Mobile menu panel ── */
+.mobile-menu {
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.mobile-menu-inner {
+  padding: 12px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-nav-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  color: #374151;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mobile-nav-btn:hover {
+  background: rgba(200, 28, 46, 0.06);
+  color: #C81C2E;
+}
+
+.mobile-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 8px;
+}
+
+.mobile-phone-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #374151;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.mobile-phone-link:hover {
+  border-color: #C81C2E;
+  color: #C81C2E;
+}
+
+/* ── Responsive: hide desktop items, show hamburger ── */
+@media (max-width: 991px) {
+  .nav-links { display: none; }
+  .nav-cta   { display: none; }
+  .nav-hamburger { display: flex; }
+  .navbar-row { height: 64px; }
+}
+
+@media (max-width: 575px) {
+  .navbar-inner { padding: 0 16px; }
+}

@@ -1,0 +1,57 @@
+/* ── Hero layout wrapper ── */
+.hero-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Hero grid: mobile-first single column ── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding-top: 96px;
+  padding-bottom: 60px;
+  align-items: start;
+}
+
+/* ── Stack → side-by-side at 992px (tablet breakpoint: 991px and below stacks) ── */
+@media (min-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    padding-top: 120px;
+    padding-bottom: 40px;
+  }
+}
+
+/* ── Centre the form card when stacked on tablet/mobile ── */
+@media (max-width: 991px) {
+  .hero-form-col {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* ── Custom dropdown animation ── */
+@keyframes ddFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Small mobile ── */
+@media (max-width: 575px) {
+  .hero-wrapper {
+    padding: 0 16px;
+  }
+
+  .hero-grid {
+    padding-top: 80px;
+    padding-bottom: 48px;
+    gap: 32px;
+  }
+}

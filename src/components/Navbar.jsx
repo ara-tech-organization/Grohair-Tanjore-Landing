@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
-import Logo from '../assets/Logo.png'
+import Logo from '../assets/Header.png'
+import './Navbar.css'
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
@@ -27,7 +28,7 @@ export default function Navbar({ onBookClick }) {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -40,50 +41,56 @@ export default function Navbar({ onBookClick }) {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      className="navbar"
       style={{
-        background: scrolled ? 'rgba(255,255,255,0.97)' : '#ffffff',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.1)' : '0 1px 0 rgba(0,0,0,0.06)',
+        background: '#fff',
+        backdropFilter: 'none',
+        boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.10)' : '0 1px 0 #e5e7eb',
       }}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
+      <div className="navbar-inner">
+        <div className="navbar-row">
+
+          {/* ── Logo ── */}
           <a
             href="#home"
+            className="navbar-logo-link"
             onClick={(e) => { e.preventDefault(); handleNavClick('#home') }}
-            className="flex-shrink-0"
           >
             <img src={Logo} alt="Advanced Grohair & Gloskin Thanjavur" className="navbar-logo" />
           </a>
 
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1">
+          {/* ── Desktop nav links ── */}
+          <ul className="nav-links">
             {NAV_LINKS.map((link) =>
               link.sub ? (
-                <li key={link.label} className="relative">
+                <li key={link.label} className="nav-dropdown-wrap">
                   <button
-                    className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-700 rounded hover:text-red-700 transition-colors"
-                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                    className="nav-link-btn"
                     onMouseEnter={() => setDropOpen(true)}
                     onMouseLeave={() => setDropOpen(false)}
                     onClick={() => handleNavClick(link.href)}
                   >
                     {link.label}
-                    <ChevronDown size={14} className={`transition-transform duration-200 ${dropOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown
+                      size={13}
+                      style={{
+                        transition: 'transform 0.2s',
+                        transform: dropOpen ? 'rotate(180deg)' : 'none',
+                      }}
+                    />
                   </button>
+
                   {dropOpen && (
                     <div
-                      className="absolute top-full left-0 mt-1 w-52 bg-white rounded-lg shadow-xl border border-gray-100 py-1 z-50 animate-scale-in"
+                      className="nav-dropdown"
                       onMouseEnter={() => setDropOpen(true)}
                       onMouseLeave={() => setDropOpen(false)}
                     >
                       {link.sub.map((s) => (
                         <button
                           key={s.label}
-                          className="block w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors"
-                          style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 500 }}
+                          className="nav-dropdown-btn"
                           onClick={() => handleNavClick(s.href)}
                         >
                           {s.label}
@@ -95,8 +102,7 @@ export default function Navbar({ onBookClick }) {
               ) : (
                 <li key={link.label}>
                   <button
-                    className="px-4 py-2 text-sm font-medium text-gray-700 rounded hover:text-red-700 transition-colors"
-                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                    className="nav-link-btn"
                     onClick={() => handleNavClick(link.href)}
                   >
                     {link.label}
@@ -106,64 +112,58 @@ export default function Navbar({ onBookClick }) {
             )}
           </ul>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <a
-              href="tel:8098756789"
-              className="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-red-700 transition-colors"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
-              <Phone size={15} />
+          {/* ── Desktop CTA ── */}
+          <div className="nav-cta">
+            <a href="tel:8098756789" className="nav-phone-link">
+              <Phone size={14} />
               80987 56789
             </a>
             <button
               onClick={onBookClick}
-              className="btn-primary text-sm px-5 py-2.5"
-              style={{ fontSize: 13 }}
+              className="btn-primary"
+              style={{ padding: '9px 20px', fontSize: 13 }}
             >
               Book Appointment
             </button>
           </div>
 
-          {/* Mobile menu toggle */}
+          {/* ── Hamburger ── */}
           <button
-            className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            className="nav-hamburger"
             onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
-        </div>
-      </nav>
 
-      {/* Mobile Menu */}
+        </div>
+      </div>
+
+      {/* ── Mobile menu ── */}
       <div
-        className="md:hidden overflow-hidden transition-all duration-300"
-        style={{ maxHeight: open ? '500px' : '0', background: '#fff', borderTop: open ? '1px solid #f0f0f0' : 'none' }}
+        className="mobile-menu"
+        style={{ maxHeight: open ? '520px' : '0' }}
       >
-        <div className="px-4 py-3 space-y-1">
+        <div className="mobile-menu-inner">
           {NAV_LINKS.map((link) => (
             <button
               key={link.label}
-              className="block w-full text-left px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
+              className="mobile-nav-btn"
               onClick={() => handleNavClick(link.href)}
             >
               {link.label}
             </button>
           ))}
-          <div className="pt-2 pb-1 flex flex-col gap-2">
-            <a
-              href="tel:8098756789"
-              className="flex items-center justify-center gap-2 text-sm font-semibold py-2.5 border border-gray-200 rounded-lg text-gray-700"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
+
+          <div className="mobile-cta-group">
+            <a href="tel:8098756789" className="mobile-phone-link">
               <Phone size={15} />
               80987 56789
             </a>
             <button
               onClick={() => { setOpen(false); onBookClick() }}
-              className="btn-primary text-sm px-5 py-2.5 justify-center w-full"
+              className="btn-primary"
+              style={{ padding: '12px 20px', fontSize: 14, justifyContent: 'center', width: '100%' }}
             >
               Book Free Consultation
             </button>

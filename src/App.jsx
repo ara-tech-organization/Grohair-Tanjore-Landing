@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
 import PopupForm from './components/PopupForm'
 import MobileBottomBar from './components/MobileBottomBar'
-import Home from './pages/Home'
+import Footer from './components/Footer'
+import Hero from './components/Hero'
+import WhyChooseUs from './components/WhyChooseUs'
+import HairProblems from './components/HairProblems'
+import Treatments from './components/Treatments'
+import Testimonials from './components/Testimonials'
+import FAQs from './components/FAQs'
+import FinalCTA from './components/FinalCTA'
 
 export default function App() {
   const [showPopup, setShowPopup] = useState(false)
@@ -18,7 +24,15 @@ export default function App() {
   return (
     <>
       <Navbar onBookClick={book} />
-      <Home onBookClick={book} />
+      <main>
+        <Hero onBookClick={book} />
+        <WhyChooseUs onBookClick={book} />
+        <HairProblems onBookClick={book} />
+        <Treatments onBookClick={book} />
+        <Testimonials onBookClick={book} />
+        <FAQs onBookClick={book} />
+        <FinalCTA onBookClick={book} />
+      </main>
       <Footer />
       <MobileBottomBar onBookClick={book} />
       {showPopup && <PopupForm onClose={() => setShowPopup(false)} />}

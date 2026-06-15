@@ -9,7 +9,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 .footer-topbar-inner {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 20px 24px;
   display: flex;
@@ -42,7 +42,7 @@
 
 /* Main grid */
 .footer-main {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 48px 24px;
   display: grid;
@@ -58,12 +58,11 @@
 
 /* Brand column */
 .footer-logo {
-  height: 56px;
+  height: 90px;
   width: auto;
-  max-width: 220px;
+  max-width: 300px;
   display: block;
   margin-bottom: 16px;
-  filter: brightness(0) invert(1);
 }
 .footer-brand-text {
   font-size: 14px;
@@ -76,21 +75,33 @@
   gap: 12px;
 }
 .footer-social-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  transition: background 0.22s, color 0.22s, transform 0.22s, border-color 0.22s;
 }
 .footer-social-btn:hover {
-  background: #C81C2E;
+  transform: translateY(-3px);
   color: #fff;
-  transform: scale(1.1);
+}
+.footer-social-btn:nth-child(1):hover {
+  background: #1877F2;
+  border-color: #1877F2;
+}
+.footer-social-btn:nth-child(2):hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-color: #dc2743;
+}
+.footer-social-btn:nth-child(3):hover {
+  background: #FF0000;
+  border-color: #FF0000;
 }
 
 /* Column headings */
@@ -174,7 +185,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 .footer-bottombar-inner {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 16px 24px;
   display: flex;

@@ -1,0 +1,299 @@
+/* ── Section ── */
+.finalcta-section {
+  font-family: 'Poppins', sans-serif;
+  padding: 80px 0;
+  background: #f8f9fb;
+  position: relative;
+  overflow: hidden;
+}
+
+.finalcta-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Two-panel split ── */
+.finalcta-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.12);
+}
+
+@media (min-width: 900px) {
+  .finalcta-split { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── LEFT panel — content ── */
+.finalcta-left {
+  background: #fff;
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+@media (max-width: 599px) {
+  .finalcta-left { padding: 36px 24px; }
+}
+
+.finalcta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #C81C2E;
+  background: rgba(200,28,46,0.08);
+  border: 1.5px solid rgba(200,28,46,0.18);
+  padding: 7px 16px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+
+.finalcta-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #C81C2E;
+  animation: ctaPulse 1.8s ease infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.7); }
+}
+
+.finalcta-heading {
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #1A0A0E;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 14px;
+}
+
+.finalcta-heading span { color: #C81C2E; }
+
+.finalcta-subtext {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.75;
+  margin: 0 0 32px;
+  max-width: 380px;
+}
+
+/* Trust checklist */
+.finalcta-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.finalcta-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.finalcta-check-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(200,28,46,0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Address */
+.finalcta-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  background: #f8f9fb;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.finalcta-address-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(200,28,46,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.finalcta-address p {
+  font-size: 13px;
+  color: #6B7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.finalcta-address strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1A0A0E;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 3px;
+}
+
+/* ── RIGHT panel — red CTA ── */
+.finalcta-right {
+  background: linear-gradient(145deg, #C81C2E 0%, #9E0F20 60%, #6A0812 100%);
+  padding: 52px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 599px) {
+  .finalcta-right { padding: 36px 24px; }
+}
+
+/* Decorative rings */
+.finalcta-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+
+/* Stats grid */
+.finalcta-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.finalcta-stat {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.finalcta-stat-value {
+  display: block;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.finalcta-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+}
+
+/* Divider */
+.finalcta-right-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  margin-bottom: 28px;
+}
+
+/* Right heading */
+.finalcta-right-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.finalcta-right-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+/* Buttons */
+.finalcta-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 12px;
+  background: #fff;
+  color: #C81C2E;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.finalcta-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.28);
+}
+
+.finalcta-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.finalcta-btn-secondary:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+/* Privacy note */
+.finalcta-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 16px;
+}
