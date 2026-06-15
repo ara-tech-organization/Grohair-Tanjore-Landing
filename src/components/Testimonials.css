@@ -98,6 +98,10 @@
   gap: 24px;
 }
 
+.testimonials-mobile-stage {
+  display: none;
+}
+
 .testimonials-slider-controls {
   display: none;
 }
@@ -120,17 +124,11 @@
   }
 
   .testimonials-grid {
-    display: flex;
-    overflow: hidden;
-    gap: 16px;
-    transform: translateX(calc((100% + 16px) * var(--active-index, 0) * -1));
-    transition: transform 0.4s ease;
+    display: none;
   }
 
-  .testimonial-card {
-    min-width: 100%;
-    max-width: 100%;
-    flex-shrink: 0;
+  .testimonials-mobile-stage {
+    display: block;
   }
 
   .testimonials-slider-controls {

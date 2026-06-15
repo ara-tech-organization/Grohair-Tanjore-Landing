@@ -41,7 +41,9 @@ export async function submitAppointmentLead({ name, phone, concern, source = 'We
 
   try {
     result = await response.json()
-  } catch {}
+  } catch {
+    result = undefined
+  }
 
   if (!response.ok || !result?.success) {
     throw new Error(result?.message || 'Appointment submission failed')

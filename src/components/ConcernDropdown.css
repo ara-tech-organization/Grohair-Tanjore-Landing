@@ -73,7 +73,7 @@
 
 .concern-dropdown__menu {
   position: fixed;
-  z-index: 160;
+  z-index: 2100;
   background: #fff;
   border: 1.5px solid #e5e7eb;
   border-radius: 14px;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { X, CheckCircle, Lock, ShieldCheck, Clock, Star } from 'lucide-react'
 import ConcernDropdown from './ConcernDropdown'
 import { CONCERNS } from './concerns'
@@ -17,6 +17,20 @@ export default function PopupForm({ onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const [errors, setErrors] = useState({})
+
+  useEffect(() => {
+    const { body, documentElement } = document
+    const previousBodyOverflow = body.style.overflow
+    const previousHtmlOverflow = documentElement.style.overflow
+
+    body.style.overflow = 'hidden'
+    documentElement.style.overflow = 'hidden'
+
+    return () => {
+      body.style.overflow = previousBodyOverflow
+      documentElement.style.overflow = previousHtmlOverflow
+    }
+  }, [])
 
   const updateField = (key, value) => {
     setForm((current) => ({ ...current, [key]: value }))

@@ -1,4 +1,16 @@
-import { ArrowRight, Wind, TrendingDown, Minus, Puzzle, Feather, Layers, Eye } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Wind,
+  TrendingDown,
+  Minus,
+  Puzzle,
+  Feather,
+  Layers,
+  Eye,
+} from 'lucide-react'
 import { useIntersect } from '../hooks/useIntersect'
 import './sections.css'
 
@@ -47,8 +59,183 @@ const PROBLEMS = [
   },
 ]
 
+function ProblemCard({ item, index, onBookClick }) {
+  const { Icon, title, desc, tag } = item
+
+  return (
+    <div
+      className={`problem-card reveal ${['anim-d1', 'anim-d2', 'anim-d3', 'anim-d4', 'anim-d5', 'anim-d6', 'anim-d6'][index] || ''}`}
+      style={{
+        position: 'relative',
+        padding: 24,
+        borderRadius: 12,
+        background: '#fff',
+        border: '1px solid rgba(200,28,46,0.12)',
+        cursor: 'pointer',
+        transition: 'background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s',
+      }}
+      onMouseEnter={(event) => {
+        event.currentTarget.style.background = 'rgba(200,28,46,0.05)'
+        event.currentTarget.style.borderColor = 'rgba(200,28,46,0.3)'
+        event.currentTarget.style.transform = 'translateY(-4px)'
+        event.currentTarget.style.boxShadow = '0 8px 24px rgba(200,28,46,0.1)'
+      }}
+      onMouseLeave={(event) => {
+        event.currentTarget.style.background = '#fff'
+        event.currentTarget.style.borderColor = 'rgba(200,28,46,0.12)'
+        event.currentTarget.style.transform = 'none'
+        event.currentTarget.style.boxShadow = 'none'
+      }}
+    >
+      {tag ? (
+        <span
+          style={{
+            position: 'absolute',
+            top: 12,
+            right: 12,
+            fontSize: 10,
+            fontWeight: 700,
+            padding: '2px 8px',
+            borderRadius: 999,
+            background: '#C81C2E',
+            color: '#fff',
+          }}
+        >
+          {tag}
+        </span>
+      ) : null}
+
+      <div
+        style={{
+          width: 40,
+          height: 40,
+          borderRadius: 10,
+          marginBottom: 16,
+          background: 'rgba(200,28,46,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Icon size={20} style={{ color: '#C81C2E' }} />
+      </div>
+
+      <h3 style={{ fontSize: 13, fontWeight: 700, color: '#1A0A0E', lineHeight: 1.4, marginBottom: 8 }}>
+        {title}
+      </h3>
+      <p style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.7, marginBottom: 16 }}>{desc}</p>
+
+      <button
+        onClick={onBookClick}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 4,
+          fontSize: 12,
+          fontWeight: 600,
+          color: '#C81C2E',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          fontFamily: 'Poppins, sans-serif',
+          padding: 0,
+        }}
+      >
+        Find Your Treatment <ArrowRight size={11} />
+      </button>
+    </div>
+  )
+}
+
+function ProblemCtaCard({ onBookClick }) {
+  return (
+    <div
+      className="reveal anim-d6"
+      style={{
+        padding: 24,
+        borderRadius: 12,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        background: 'linear-gradient(135deg, #C81C2E, #8B0A1A)',
+        border: '1px solid rgba(200,28,46,0.2)',
+        boxShadow: '0 8px 28px rgba(200,28,46,0.18)',
+        minHeight: 180,
+      }}
+    >
+      <div>
+        <p
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            color: 'rgba(255,255,255,0.65)',
+            marginBottom: 8,
+          }}
+        >
+          Not Sure?
+        </p>
+        <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 8, lineHeight: 1.35 }}>
+          Ask Our Hair Doctor - It&apos;s Free
+        </h3>
+        <p style={{ fontSize: 12, lineHeight: 1.7, color: 'rgba(255,255,255,0.75)' }}>
+          Not sure which concern fits you? Let our specialist guide you in a free, no-pressure consultation.
+        </p>
+      </div>
+
+      <button
+        onClick={onBookClick}
+        style={{
+          marginTop: 24,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          fontSize: 13,
+          fontWeight: 700,
+          color: '#fff',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          fontFamily: 'Poppins, sans-serif',
+          padding: 0,
+        }}
+      >
+        Find Your Treatment <ArrowRight size={16} />
+      </button>
+    </div>
+  )
+}
+
 export default function HairProblems({ onBookClick }) {
   const sectionRef = useIntersect()
+  const [isMobile, setIsMobile] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const mobileSlides = [...PROBLEMS, { type: 'cta' }]
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined
+    }
+
+    const media = window.matchMedia('(max-width: 599px)')
+    const syncMobileState = () => setIsMobile(media.matches)
+
+    syncMobileState()
+    media.addEventListener('change', syncMobileState)
+
+    return () => media.removeEventListener('change', syncMobileState)
+  }, [])
+
+  const goToPrevious = () => {
+    setActiveIndex((current) => (current - 1 + mobileSlides.length) % mobileSlides.length)
+  }
+
+  const goToNext = () => {
+    setActiveIndex((current) => (current + 1) % mobileSlides.length)
+  }
+
+  const activeSlide = mobileSlides[activeIndex]
 
   return (
     <section
@@ -62,180 +249,181 @@ export default function HairProblems({ onBookClick }) {
         overflow: 'hidden',
       }}
     >
-      {/* Dot grid overlay */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        backgroundImage: 'radial-gradient(circle, rgba(200,28,46,0.12) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          backgroundImage: 'radial-gradient(circle, rgba(200,28,46,0.12) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }}
+      />
 
-      {/* Diagonal stripe accent */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        backgroundImage: 'repeating-linear-gradient(-55deg, transparent 0, transparent 18px, rgba(200,28,46,0.03) 18px, rgba(200,28,46,0.03) 19px)',
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          backgroundImage: 'repeating-linear-gradient(-55deg, transparent 0, transparent 18px, rgba(200,28,46,0.03) 18px, rgba(200,28,46,0.03) 19px)',
+        }}
+      />
 
-      {/* Large glow blobs */}
-      <div style={{
-        position: 'absolute', top: '-80px', right: '-80px',
-        width: 380, height: 380, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(200,28,46,0.12) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: '-60px', left: '-60px',
-        width: 300, height: 300, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(200,28,46,0.09) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', top: '40%', left: '50%',
-        width: 200, height: 200, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(200,28,46,0.05) 0%, transparent 70%)',
-        pointerEvents: 'none', transform: 'translate(-50%,-50%)',
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          top: '-80px',
+          right: '-80px',
+          width: 380,
+          height: 380,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(200,28,46,0.12) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '-60px',
+          left: '-60px',
+          width: 300,
+          height: 300,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(200,28,46,0.09) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: '40%',
+          left: '50%',
+          width: 200,
+          height: 200,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(200,28,46,0.05) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          transform: 'translate(-50%,-50%)',
+        }}
+      />
 
-      {/* Decorative ring top-left */}
-      <div style={{
-        position: 'absolute', top: -40, left: -40,
-        width: 200, height: 200, borderRadius: '50%',
-        border: '1.5px solid rgba(200,28,46,0.1)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', top: -20, left: -20,
-        width: 120, height: 120, borderRadius: '50%',
-        border: '1.5px solid rgba(200,28,46,0.08)',
-        pointerEvents: 'none',
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          top: -40,
+          left: -40,
+          width: 200,
+          height: 200,
+          borderRadius: '50%',
+          border: '1.5px solid rgba(200,28,46,0.1)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: -20,
+          left: -20,
+          width: 120,
+          height: 120,
+          borderRadius: '50%',
+          border: '1.5px solid rgba(200,28,46,0.08)',
+          pointerEvents: 'none',
+        }}
+      />
 
       <div className="section-inner">
-        {/* Header */}
         <div className="hp-header">
           <div className="reveal-left">
-            <span style={{
-              display: 'inline-block', fontSize: 11, fontWeight: 700,
-              textTransform: 'uppercase', letterSpacing: '0.12em',
-              color: '#C81C2E', background: 'rgba(200,28,46,0.08)',
-              padding: '4px 14px', borderRadius: 999, marginBottom: 14,
-            }}>
+            <span
+              style={{
+                display: 'inline-block',
+                fontSize: 11,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: '#C81C2E',
+                background: 'rgba(200,28,46,0.08)',
+                padding: '4px 14px',
+                borderRadius: 999,
+                marginBottom: 14,
+              }}
+            >
               Hair Problems We Treat
             </span>
-            <h2 style={{
-              fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700,
-              color: '#1A0A0E', letterSpacing: '-0.02em', lineHeight: 1.2,
-            }}>
-              Hair Problems<br />
+            <h2
+              style={{
+                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                fontWeight: 700,
+                color: '#1A0A0E',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.2,
+              }}
+            >
+              Hair Problems
+              <br />
               <span style={{ color: '#C81C2E' }}>We Treat</span>
             </h2>
           </div>
-          <p className="reveal-right" style={{
-            fontSize: 14, lineHeight: 1.75,
-            color: '#6B7280',
-            maxWidth: 320,
-          }}>
+          <p
+            className="reveal-right"
+            style={{
+              fontSize: 14,
+              lineHeight: 1.75,
+              color: '#6B7280',
+              maxWidth: 320,
+            }}
+          >
             Our hair loss treatment in Thanjavur is designed for all types of hair &amp; scalp conditions.
           </p>
         </div>
 
-        {/* Problems grid */}
-        <div className="hp-grid">
-          {PROBLEMS.map(({ Icon, title, desc, tag }, i) => (
-            <div
-              key={title}
-              className={`problem-card reveal ${['anim-d1','anim-d2','anim-d3','anim-d4','anim-d5','anim-d6','anim-d6'][i] || ''}`}
-              style={{
-                position: 'relative',
-                padding: 24,
-                borderRadius: 12,
-                background: '#fff',
-                border: '1px solid rgba(200,28,46,0.12)',
-                cursor: 'pointer',
-                transition: 'background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(200,28,46,0.05)'
-                e.currentTarget.style.borderColor = 'rgba(200,28,46,0.3)'
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(200,28,46,0.1)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#fff'
-                e.currentTarget.style.borderColor = 'rgba(200,28,46,0.12)'
-                e.currentTarget.style.transform = 'none'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              {tag && (
-                <span style={{
-                  position: 'absolute', top: 12, right: 12,
-                  fontSize: 10, fontWeight: 700,
-                  padding: '2px 8px', borderRadius: 999,
-                  background: '#C81C2E', color: '#fff',
-                }}>
-                  {tag}
-                </span>
+        {isMobile ? (
+          <>
+            <div className="hp-mobile-stage">
+              {activeSlide.type === 'cta' ? (
+                <ProblemCtaCard onBookClick={onBookClick} />
+              ) : (
+                <ProblemCard item={activeSlide} index={activeIndex} onBookClick={onBookClick} />
               )}
-              <div style={{
-                width: 40, height: 40, borderRadius: 10, marginBottom: 16,
-                background: 'rgba(200,28,46,0.08)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <Icon size={20} style={{ color: '#C81C2E' }} />
-              </div>
-              <h3 style={{ fontSize: 13, fontWeight: 700, color: '#1A0A0E', lineHeight: 1.4, marginBottom: 8 }}>{title}</h3>
-              <p style={{ fontSize: 12, color: '#6B7280', lineHeight: 1.7, marginBottom: 16 }}>{desc}</p>
+            </div>
+
+            <div className="hp-slider-controls">
               <button
-                onClick={onBookClick}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 4,
-                  fontSize: 12, fontWeight: 600, color: '#C81C2E',
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  fontFamily: 'Poppins, sans-serif', padding: 0,
-                }}
+                type="button"
+                className="hp-arrow"
+                onClick={goToPrevious}
+                aria-label="Previous hair problem"
               >
-                Find Your Treatment <ArrowRight size={11} />
+                <ChevronLeft size={18} />
+              </button>
+
+              <p className="hp-slider-count">
+                {activeIndex + 1} / {mobileSlides.length}
+              </p>
+
+              <button
+                type="button"
+                className="hp-arrow"
+                onClick={goToNext}
+                aria-label="Next hair problem"
+              >
+                <ChevronRight size={18} />
               </button>
             </div>
-          ))}
-
-          {/* CTA card */}
-          <div
-            className="reveal anim-d6"
-            style={{
-              padding: 24, borderRadius: 12,
-              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-              background: 'linear-gradient(135deg, #C81C2E, #8B0A1A)',
-              border: '1px solid rgba(200,28,46,0.2)',
-              boxShadow: '0 8px 28px rgba(200,28,46,0.18)',
-              minHeight: 180,
-            }}
-          >
-            <div>
-              <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.65)', marginBottom: 8 }}>
-                Not Sure?
-              </p>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 8, lineHeight: 1.35 }}>
-                Ask Our Hair Doctor — It's Free
-              </h3>
-              <p style={{ fontSize: 12, lineHeight: 1.7, color: 'rgba(255,255,255,0.75)' }}>
-                Not sure which concern fits you? Let our specialist guide you in a free, no-pressure consultation.
-              </p>
-            </div>
-            <button
-              onClick={onBookClick}
-              style={{
-                marginTop: 24,
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                fontSize: 13, fontWeight: 700, color: '#fff',
-                background: 'none', border: 'none', cursor: 'pointer',
-                fontFamily: 'Poppins, sans-serif', padding: 0,
-              }}
-            >
-              Find Your Treatment <ArrowRight size={16} />
-            </button>
+          </>
+        ) : (
+          <div className="hp-grid">
+            {PROBLEMS.map((item, index) => (
+              <ProblemCard
+                key={item.title}
+                item={item}
+                index={index}
+                onBookClick={onBookClick}
+              />
+            ))}
+            <ProblemCtaCard onBookClick={onBookClick} />
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

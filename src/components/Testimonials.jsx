@@ -210,14 +210,21 @@ export default function Testimonials({ onBookClick }) {
           </div>
         </div>
 
-        <div
-          className="testimonials-grid"
-          style={{ '--active-index': activeIndex }}
-        >
-          {REVIEWS.map((review, index) => (
-            <TestimonialCard key={review.name} review={review} index={index} />
-          ))}
-        </div>
+        {isMobile ? (
+          <div className="testimonials-mobile-stage">
+            <TestimonialCard
+              key={REVIEWS[activeIndex].name}
+              review={REVIEWS[activeIndex]}
+              index={activeIndex}
+            />
+          </div>
+        ) : (
+          <div className="testimonials-grid">
+            {REVIEWS.map((review, index) => (
+              <TestimonialCard key={review.name} review={review} index={index} />
+            ))}
+          </div>
+        )}
 
         <div className="testimonials-slider-controls">
           <button
