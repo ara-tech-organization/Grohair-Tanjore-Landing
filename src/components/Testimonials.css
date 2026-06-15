@@ -1,28 +1,25 @@
-/* ── Section ── */
 .testimonials-section {
-  background: linear-gradient(135deg, #FFF0F1 0%, #FDE8EA 55%, #FFF5F6 100%);
+  background: linear-gradient(135deg, #fff0f1 0%, #fde8ea 55%, #fff5f6 100%);
   padding: 80px 0;
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;
 }
 
-/* Dot grid */
 .testimonials-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(200,28,46,0.11) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(200, 28, 46, 0.11) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
 }
 
-/* Diagonal stripes */
 .testimonials-section::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(-55deg, transparent 0, transparent 18px, rgba(200,28,46,0.03) 18px, rgba(200,28,46,0.03) 19px);
+  background-image: repeating-linear-gradient(-55deg, transparent 0, transparent 18px, rgba(200, 28, 46, 0.03) 18px, rgba(200, 28, 46, 0.03) 19px);
   pointer-events: none;
 }
 
@@ -32,7 +29,6 @@
   padding: 0 24px;
 }
 
-/* ── Header ── */
 .testimonials-header {
   text-align: center;
   margin-bottom: 52px;
@@ -44,7 +40,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #C81C2E;
+  color: #c81c2e;
   background: rgba(200, 28, 46, 0.08);
   padding: 5px 16px;
   border-radius: 999px;
@@ -54,25 +50,24 @@
 .testimonials-title {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
-  color: #1A0A0E;
+  color: #1a0a0e;
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin: 0 0 12px;
 }
 
 .testimonials-title span {
-  color: #C81C2E;
+  color: #c81c2e;
 }
 
 .testimonials-subtitle {
   font-size: 14px;
-  color: #6B7280;
+  color: #6b7280;
   line-height: 1.7;
   max-width: 480px;
   margin: 0 auto;
 }
 
-/* ── Rating summary strip ── */
 .testimonials-rating-strip {
   display: flex;
   align-items: center;
@@ -97,42 +92,60 @@
   color: #9ca3af;
 }
 
-/* ── Cards grid — desktop ── */
 .testimonials-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
 }
 
+.testimonials-slider-controls {
+  display: none;
+}
+
 @media (min-width: 640px) {
-  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1024px) {
-  .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* ── Mobile slider ── */
 @media (max-width: 639px) {
+  .testimonials-inner {
+    padding: 0 16px;
+  }
+
   .testimonials-grid {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    overflow: hidden;
     gap: 16px;
-    padding-bottom: 16px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    transform: translateX(calc((100% + 16px) * var(--active-index, 0) * -1));
+    transition: transform 0.4s ease;
   }
-  .testimonials-grid::-webkit-scrollbar { display: none; }
+
   .testimonial-card {
-    min-width: 82vw;
-    max-width: 82vw;
-    scroll-snap-align: start;
+    min-width: 100%;
+    max-width: 100%;
     flex-shrink: 0;
+  }
+
+  .testimonials-slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .testimonials-rating-strip {
+    flex-wrap: wrap;
   }
 }
 
-/* ── Individual card ── */
 .testimonial-card {
   background: #fff;
   border-radius: 16px;
@@ -151,25 +164,23 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* Top accent line */
 .testimonial-card-accent {
   position: absolute;
   top: 0;
   left: 24px;
   right: 24px;
   height: 3px;
-  background: linear-gradient(90deg, #C81C2E, #ff6b7a);
+  background: linear-gradient(90deg, #c81c2e, #ff6b7a);
   border-radius: 0 0 4px 4px;
 }
 
-/* ── Treatment badge inside card ── */
 .testimonial-treatment {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-size: 11px;
   font-weight: 700;
-  color: #C81C2E;
+  color: #c81c2e;
   background: rgba(200, 28, 46, 0.07);
   padding: 4px 10px;
   border-radius: 999px;
@@ -181,18 +192,16 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #C81C2E;
+  background: #c81c2e;
   flex-shrink: 0;
 }
 
-/* ── Stars ── */
 .testimonial-stars {
   display: flex;
   gap: 2px;
   margin-bottom: 12px;
 }
 
-/* ── Quote text ── */
 .testimonial-quote {
   font-size: 14px;
   color: #374151;
@@ -210,7 +219,6 @@
   pointer-events: none;
 }
 
-/* ── Patient info ── */
 .testimonial-footer {
   display: flex;
   align-items: center;
@@ -223,7 +231,7 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #C81C2E, #9E0F20);
+  background: linear-gradient(135deg, #c81c2e, #9e0f20);
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -236,7 +244,7 @@
 .testimonial-name {
   font-size: 13px;
   font-weight: 700;
-  color: #1A0A0E;
+  color: #1a0a0e;
   margin: 0 0 2px;
 }
 
@@ -246,7 +254,6 @@
   margin: 0;
 }
 
-/* ── Verified badge ── */
 .testimonial-verified {
   display: flex;
   align-items: center;
@@ -258,7 +265,49 @@
   flex-shrink: 0;
 }
 
-/* ── Bottom CTA ── */
+.testimonials-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.testimonials-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(200, 28, 46, 0.22);
+  cursor: pointer;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.testimonials-dot.is-active {
+  width: 24px;
+  background: #c81c2e;
+}
+
+.testimonials-arrow {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(200, 28, 46, 0.18);
+  border-radius: 999px;
+  background: #fff;
+  color: #c81c2e;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(200, 28, 46, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.testimonials-arrow:hover {
+  transform: translateY(-1px);
+  background: #fff5f6;
+  box-shadow: 0 10px 24px rgba(200, 28, 46, 0.18);
+}
+
 .testimonials-cta {
   text-align: center;
   margin-top: 48px;

@@ -21,10 +21,26 @@
 /* ── Stack → side-by-side at 992px (tablet breakpoint: 991px and below stacks) ── */
 @media (min-width: 992px) {
   .hero-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    padding-top: 120px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(380px, 0.85fr);
+    gap: 48px;
+    padding-top: 140px;
     padding-bottom: 40px;
+    align-items: start;
+  }
+}
+
+.hero-copy-col {
+  max-width: 640px;
+}
+
+.hero-form-col {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .hero-form-col {
+    max-width: 460px;
+    justify-self: end;
   }
 }
 
@@ -50,8 +66,12 @@
   }
 
   .hero-grid {
-    padding-top: 80px;
+    padding-top: 88px;
     padding-bottom: 48px;
     gap: 32px;
+  }
+
+  .hero-copy-col {
+    max-width: none;
   }
 }

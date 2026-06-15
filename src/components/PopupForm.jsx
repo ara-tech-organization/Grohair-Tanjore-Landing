@@ -1,61 +1,86 @@
 import { useState } from 'react'
 import { X, CheckCircle, Lock, ShieldCheck, Clock, Star } from 'lucide-react'
+import ConcernDropdown from './ConcernDropdown'
+import { CONCERNS } from './concerns'
+import { submitAppointmentLead } from '../lib/submitAppointmentLead'
 import './PopupForm.css'
-
-const CONCERNS = [
-  'Hair Fall / Hair Loss',
-  'Thinning Hair',
-  'Baldness / Pattern Hair Loss',
-  'Receding Hairline',
-  'Alopecia (Patchy Hair Loss)',
-  'Eyebrow Restoration',
-  'Hair Transplant Enquiry',
-  'Scalp Problems',
-  'Other',
-]
 
 const TRUST_BADGES = [
   { icon: <ShieldCheck size={14} />, label: 'Free Consult' },
-  { icon: <Clock size={14} />,      label: 'Quick Reply' },
-  { icon: <Star size={14} />,       label: '5★ Rated' },
+  { icon: <Clock size={14} />, label: 'Quick Reply' },
+  { icon: <Star size={14} />, label: '5-Star Rated' },
 ]
 
 export default function PopupForm({ onClose }) {
   const [form, setForm] = useState({ name: '', phone: '', concern: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [errors, setErrors] = useState({})
 
-  const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
-  const clrErr = (key)  => setErrors(e => ({ ...e, [key]: '' }))
-
-  const validate = () => {
-    const e = {}
-    if (!form.name.trim()) e.name = 'Name is required'
-    if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) e.phone = 'Enter a valid 10-digit number'
-    if (!form.concern) e.concern = 'Please select your concern'
-    return e
+  const updateField = (key, value) => {
+    setForm((current) => ({ ...current, [key]: value }))
+    setErrors((current) => ({ ...current, [key]: '' }))
+    setSubmitError('')
   }
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault()
-    const e = validate()
-    if (Object.keys(e).length) { setErrors(e); return }
-    setSubmitted(true)
+  const validate = () => {
+    const nextErrors = {}
+
+    if (!form.name.trim()) {
+      nextErrors.name = 'Name is required'
+    }
+
+    if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) {
+      nextErrors.phone = 'Enter a valid 10-digit number'
+    }
+
+    if (!form.concern) {
+      nextErrors.concern = 'Please select your concern'
+    }
+
+    return nextErrors
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    const nextErrors = validate()
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors)
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitError('')
+
+    try {
+      await submitAppointmentLead(form)
+      setSubmitted(true)
+    } catch (error) {
+      setSubmitError(error.message || 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <div
       className="popup-overlay"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose()
+        }
+      }}
     >
       <div className="popup-card">
-
-        {/* ── Header ── */}
         <div className="popup-header">
           <div className="popup-header-stripes" />
           <div className="popup-badge">Limited Period Offer</div>
           <h2 className="popup-title">
-            Advanced Grohair &amp; Gloskin<br />Thanjavur
+            Advanced Grohair &amp; Gloskin
+            <br />
+            Thanjavur
           </h2>
           <p className="popup-subtitle">Book your expert consultation today</p>
           <button className="popup-close" onClick={onClose} aria-label="Close">
@@ -63,7 +88,6 @@ export default function PopupForm({ onClose }) {
           </button>
         </div>
 
-        {/* ── Body ── */}
         <div className="popup-body">
           {submitted ? (
             <div className="popup-success">
@@ -82,8 +106,6 @@ export default function PopupForm({ onClose }) {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
-
-              {/* Name */}
               <div className="popup-field">
                 <label className="popup-label">Full Name</label>
                 <input
@@ -91,12 +113,11 @@ export default function PopupForm({ onClose }) {
                   className={`popup-input${errors.name ? ' error' : ''}`}
                   placeholder="Enter your full name"
                   value={form.name}
-                  onChange={(e) => { set('name', e.target.value); clrErr('name') }}
+                  onChange={(event) => updateField('name', event.target.value)}
                 />
-                {errors.name && <p className="popup-error">{errors.name}</p>}
+                {errors.name ? <p className="popup-error">{errors.name}</p> : null}
               </div>
 
-              {/* Phone */}
               <div className="popup-field">
                 <label className="popup-label">Phone Number</label>
                 <input
@@ -104,48 +125,51 @@ export default function PopupForm({ onClose }) {
                   className={`popup-input${errors.phone ? ' error' : ''}`}
                   placeholder="10-digit mobile number"
                   value={form.phone}
-                  onChange={(e) => { set('phone', e.target.value); clrErr('phone') }}
+                  onChange={(event) => updateField('phone', event.target.value)}
                 />
-                {errors.phone && <p className="popup-error">{errors.phone}</p>}
+                {errors.phone ? <p className="popup-error">{errors.phone}</p> : null}
               </div>
 
-              {/* Concern */}
               <div className="popup-field">
                 <label className="popup-label">Hair Concern</label>
-                <select
-                  className={`popup-input${errors.concern ? ' error' : ''}`}
+                <ConcernDropdown
+                  error={errors.concern}
+                  onChange={(value) => updateField('concern', value)}
+                  options={CONCERNS}
+                  placeholder="Select your concern"
                   value={form.concern}
-                  onChange={(e) => { set('concern', e.target.value); clrErr('concern') }}
-                >
-                  <option value="">Select your concern</option>
-                  {CONCERNS.map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
-                </select>
-                {errors.concern && <p className="popup-error">{errors.concern}</p>}
+                  variant="popup"
+                />
+                {errors.concern ? <p className="popup-error">{errors.concern}</p> : null}
               </div>
 
-              {/* Submit */}
-              <button type="submit" className="popup-submit">
-                Book Free Consultation →
+              <button
+                type="submit"
+                className="popup-submit"
+                disabled={isSubmitting}
+                style={{
+                  opacity: isSubmitting ? 0.8 : 1,
+                  cursor: isSubmitting ? 'wait' : 'pointer',
+                }}
+              >
+                {isSubmitting ? 'Submitting...' : 'Book Free Consultation'}
               </button>
 
-              {/* Privacy note */}
+              {submitError ? <p className="popup-error popup-submit-error">{submitError}</p> : null}
+
               <p className="popup-trust">
                 <Lock size={11} />
                 Your details are 100% safe &amp; confidential
               </p>
 
-              {/* Trust badges */}
               <div className="popup-trust-badges">
-                {TRUST_BADGES.map((b) => (
-                  <div key={b.label} className="popup-trust-badge">
-                    <div className="popup-trust-badge-icon">{b.icon}</div>
-                    {b.label}
+                {TRUST_BADGES.map((badge) => (
+                  <div key={badge.label} className="popup-trust-badge">
+                    <div className="popup-trust-badge-icon">{badge.icon}</div>
+                    {badge.label}
                   </div>
                 ))}
               </div>
-
             </form>
           )}
         </div>

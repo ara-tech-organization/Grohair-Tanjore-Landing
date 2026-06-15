@@ -41,7 +41,7 @@ export default function WhyChooseUs({ onBookClick }) {
       fontFamily: 'Poppins, sans-serif',
       padding: '80px 0 80px',
     }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '0 24px' }}>
+      <div className="why-us-shell" style={{ maxWidth: 1320, margin: '0 auto', padding: '0 24px' }}>
 
         {/* ── Section header ── */}
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -92,7 +92,7 @@ export default function WhyChooseUs({ onBookClick }) {
         <div className="features-grid">
 
           {/* Big red card */}
-          <div className="reveal-left" style={{
+          <div className="reveal-left why-us-hero-card" style={{
             background: 'linear-gradient(145deg, #C81C2E 0%, #8B0A1A 100%)',
             borderRadius: 20, padding: 36,
             display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
@@ -182,41 +182,32 @@ export default function WhyChooseUs({ onBookClick }) {
             gap: 24px !important;
           }
         }
+        @media (max-width: 767px) {
+          .why-us-shell {
+            padding: 0 16px !important;
+          }
+          .why-us-hero-card {
+            padding: 24px !important;
+            min-height: auto !important;
+          }
+        }
         @media (max-width: 599px) {
           .stats-grid {
-            display: flex !important;
-            overflow-x: auto !important;
-            scroll-snap-type: x mandatory !important;
-            gap: 12px !important;
-            padding: 4px 0 12px !important;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 10px !important;
+            margin-bottom: 36px !important;
           }
-          .stats-grid::-webkit-scrollbar { display: none; }
           .stats-grid > * {
-            min-width: 42vw !important;
-            max-width: 42vw !important;
-            flex-shrink: 0 !important;
-            scroll-snap-align: start;
-            transform: none !important;
-            opacity: 1 !important;
+            min-width: 0 !important;
+            max-width: none !important;
           }
           .small-cards-grid {
-            display: flex !important;
-            overflow-x: auto !important;
-            scroll-snap-type: x mandatory !important;
-            align-items: flex-start !important;
-            gap: 14px !important;
-            padding: 4px 0 12px !important;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
           }
-          .small-cards-grid::-webkit-scrollbar { display: none; }
           .small-cards-grid > * {
-            min-width: 74vw !important;
-            max-width: 74vw !important;
-            flex-shrink: 0 !important;
-            scroll-snap-align: start;
+            min-width: 0 !important;
+            max-width: none !important;
             transform: none !important;
             opacity: 1 !important;
           }

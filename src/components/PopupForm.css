@@ -9,6 +9,7 @@
   padding: 80px 16px 16px;
   background: rgba(10, 2, 4, 0.65);
   backdrop-filter: blur(8px);
+  overflow-y: auto;
   animation: overlayIn 0.2s ease both;
 }
 
@@ -172,6 +173,11 @@
   margin: 4px 0 0;
 }
 
+.popup-submit-error {
+  text-align: center;
+  margin-top: 10px;
+}
+
 /* ── Submit button ── */
 .popup-submit {
   width: 100%;
@@ -276,4 +282,25 @@
   color: #6b7280;
   line-height: 1.65;
   margin: 0 0 20px;
+}
+
+@media (max-width: 575px), (max-height: 760px) {
+  .popup-overlay {
+    align-items: flex-start;
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+
+  .popup-card {
+    max-width: 100%;
+    border-radius: 22px;
+  }
+
+  .popup-header {
+    padding: 20px 20px 16px;
+  }
+
+  .popup-body {
+    padding: 18px 20px 22px;
+  }
 }
