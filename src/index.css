@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary:       #C81C2E;
+  --color-primary-dark:  #9E0F20;
+  --color-primary-light: #E8192C;
+  --color-dark:          #1A0A0E;
+  --color-dark-2:        #0D0508;
+  --font-sans: 'Poppins', system-ui, sans-serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #1A0A0E;
+  overflow-x: hidden;
+}
+#root { min-height: 100svh; }
+
+/* ── Keyframes ── */
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(36px); } to { opacity:1; transform:none; } }
+@keyframes fadeInLeft { from { opacity:0; transform:translateX(-36px); } to { opacity:1; transform:none; } }
+@keyframes fadeInRight{ from { opacity:0; transform:translateX(36px); } to { opacity:1; transform:none; } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+@keyframes scaleIn    { from { opacity:0; transform:scale(0.93); } to { opacity:1; transform:scale(1); } }
+@keyframes shimmer    { 0% { background-position:-200% center; } 100% { background-position:200% center; } }
+@keyframes float      { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+@keyframes pulse-red  { 0%,100% { box-shadow:0 0 0 0 rgba(200,28,46,.45); } 70% { box-shadow:0 0 0 12px rgba(200,28,46,0); } }
+@keyframes popupIn    { from { opacity:0; transform:scale(.88) translateY(24px); } to { opacity:1; transform:scale(1) translateY(0); } }
+@keyframes overlayIn  { from { opacity:0; } to { opacity:1; } }
+@keyframes accordionOpen { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+@keyframes spin-slow  { to { transform:rotate(360deg); } }
+
+/* ── Animation classes ── */
+.animate-fade-up     { animation: fadeInUp    0.65s ease both; }
+.animate-fade-left   { animation: fadeInLeft  0.65s ease both; }
+.animate-fade-right  { animation: fadeInRight 0.65s ease both; }
+.animate-fade-in     { animation: fadeIn      0.5s  ease both; }
+.animate-scale-in    { animation: scaleIn     0.5s  ease both; }
+.animate-float       { animation: float       4s ease-in-out infinite; }
+.animate-popup-in    { animation: popupIn     0.4s cubic-bezier(.16,1,.3,1) both; }
+.animate-overlay-in  { animation: overlayIn   0.3s ease both; }
+.animate-pulse-red   { animation: pulse-red   2s ease-in-out infinite; }
+.animate-spin-slow   { animation: spin-slow   8s linear infinite; }
+
+/* Delay helpers — named to avoid Tailwind transition-delay collision */
+.anim-d1 { animation-delay:.10s; transition-delay:.10s; }
+.anim-d2 { animation-delay:.20s; transition-delay:.20s; }
+.anim-d3 { animation-delay:.30s; transition-delay:.30s; }
+.anim-d4 { animation-delay:.40s; transition-delay:.40s; }
+.anim-d5 { animation-delay:.50s; transition-delay:.50s; }
+.anim-d6 { animation-delay:.60s; transition-delay:.60s; }
+
+/* ── Reveal — pure CSS, no JS required, content always visible ── */
+.reveal       { animation: fadeInUp   0.7s ease both; }
+.reveal-left  { animation: fadeInLeft  0.7s ease both; }
+.reveal-right { animation: fadeInRight 0.7s ease both; }
+.reveal-scale { animation: scaleIn    0.7s ease both; }
+/* reveal-visible kept for backward compat but not needed */
+.reveal.reveal-visible,
+.reveal-left.reveal-visible,
+.reveal-right.reveal-visible,
+.reveal-scale.reveal-visible { opacity:1; transform:none; }
+
+/* ── Buttons ── */
+.btn-primary {
+  display:inline-flex; align-items:center; gap:8px;
+  background:#C81C2E; color:#fff;
+  font-family:'Poppins',sans-serif; font-weight:700;
+  border:none; border-radius:8px; cursor:pointer;
+  text-decoration:none; transition:background .2s, transform .2s, box-shadow .2s;
+}
+.btn-primary:hover { background:#9E0F20; transform:translateY(-2px); box-shadow:0 8px 24px rgba(200,28,46,.35); }
+.btn-primary:active { transform:none; }
+
+.btn-white {
+  display:inline-flex; align-items:center; gap:8px;
+  background:#fff; color:#C81C2E;
+  font-family:'Poppins',sans-serif; font-weight:700;
+  border:none; border-radius:8px; cursor:pointer;
+  text-decoration:none; transition:all .2s;
+}
+.btn-white:hover { background:#f9e8ea; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.15); }
+
+.btn-outline {
+  display:inline-flex; align-items:center; gap:8px;
+  background:transparent; color:#C81C2E;
+  font-family:'Poppins',sans-serif; font-weight:700;
+  border:2px solid #C81C2E; border-radius:8px; cursor:pointer;
+  text-decoration:none; transition:all .2s;
+}
+.btn-outline:hover { background:#C81C2E; color:#fff; transform:translateY(-2px); }
+
+/* Shimmer button */
+.btn-shimmer {
+  background:linear-gradient(90deg, #C81C2E 0%, #E8192C 40%, #C81C2E 60%, #9E0F20 100%);
+  background-size:200% auto;
+  animation:shimmer 3s linear infinite;
+}
+
+/* ── Form ── */
+.form-input {
+  width:100%; padding:12px 16px;
+  border:1.5px solid #e5e7eb; border-radius:8px;
+  font-family:'Poppins',sans-serif; font-size:14px;
+  color:#1A0A0E; background:#fff; outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.form-input:focus { border-color:#C81C2E; box-shadow:0 0 0 3px rgba(200,28,46,.1); }
+.form-input::placeholder { color:#9ca3af; }
+.form-label {
+  display:block; font-size:13px; font-weight:600;
+  color:#374151; margin-bottom:6px; letter-spacing:.01em;
+}
+
+/* ── Card hover ── */
+.card-hover { transition:transform .3s ease, box-shadow .3s ease; }
+.card-hover:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,.1); }
+
+/* ── Backgrounds ── */
+.bg-dots {
+  background-image:radial-gradient(circle, rgba(255,255,255,.15) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.bg-stripes {
+  background-image:repeating-linear-gradient(
+    135deg, transparent 0, transparent 20px,
+    rgba(255,255,255,.045) 20px, rgba(255,255,255,.045) 40px
+  );
+}
+
+/* ── Accordion ── */
+.accordion-content { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+.accordion-content.open { max-height:500px; }
+
+/* ── Popup ── */
+.animate-popup-in { animation:popupIn .4s cubic-bezier(.16,1,.3,1) both; }
+.animate-overlay-in { animation:overlayIn .3s ease both; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:#f1f1f1; }
+::-webkit-scrollbar-thumb { background:#C81C2E; border-radius:3px; }
+
+/* ── No scrollbar util ── */
+.no-scrollbar::-webkit-scrollbar { display:none; }
+.no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+
+/* ── Treatment card left border accent ── */
+.treatment-card-accent { border-left:4px solid #C81C2E; }
+
+/* ── Mobile bottom bar ── */
+.mobile-bottom-bar {
+  position:fixed; bottom:0; left:0; right:0;
+  z-index:100; display:flex;
+}
+@media (min-width:768px) { .mobile-bottom-bar { display:none !important; } }
+@media (max-width:767px) { body { padding-bottom:72px; } }
+
+/* ── Section divider wave ── */
+.wave-white { clip-path:ellipse(55% 100% at 50% 100%); }
+
+/* ── Navbar logo — responsive width so full logo is readable ── */
+.navbar-logo {
+  width: 130px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+@media (min-width: 768px) {
+  .navbar-logo { width: 160px; }
+}
+
+/* ── Footer logo (inverted white for dark bg) ── */
+.footer-logo {
+  width: 140px;
+  height: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}

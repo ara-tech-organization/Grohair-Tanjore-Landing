@@ -1,0 +1,206 @@
+/* ── Footer Layout ── */
+.footer {
+  background: #0D0508;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Top bar */
+.footer-topbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.footer-topbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .footer-topbar-inner { flex-direction: row; }
+}
+
+.footer-tagline {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+.footer-phone-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.footer-phone-link:hover { opacity: 0.8; }
+
+/* Main grid */
+.footer-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 640px) {
+  .footer-main { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .footer-main { grid-template-columns: 2fr 1fr 1fr 1.5fr; }
+}
+
+/* Brand column */
+.footer-logo {
+  height: 56px;
+  width: auto;
+  max-width: 220px;
+  display: block;
+  margin-bottom: 16px;
+  filter: brightness(0) invert(1);
+}
+.footer-brand-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 20px;
+}
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.footer-social-btn:hover {
+  background: #C81C2E;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Column headings */
+.footer-col-title {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Link list buttons */
+.footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  padding: 0;
+  transition: color 0.2s;
+}
+.footer-link-btn:hover { color: #C81C2E; }
+
+/* Contact column */
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.footer-contact-icon {
+  color: #C81C2E;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.footer-contact-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+.footer-contact-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.footer-contact-link:hover { opacity: 0.7; }
+.footer-contact-web {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.footer-contact-web:hover { opacity: 0.7; }
+
+/* Bottom bar */
+.footer-bottombar {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.footer-bottombar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+@media (min-width: 640px) {
+  .footer-bottombar-inner { flex-direction: row; }
+}
+
+.footer-copyright {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+.footer-crafted {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+.footer-crafted-link {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-crafted-link:hover { color: #C81C2E; }
