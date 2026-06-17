@@ -70,7 +70,7 @@ export default function PopupForm({ onClose }) {
 
     try {
       await submitAppointmentLead(form)
-      window.location.href = '/Grohair-Tanjore-Landing/thankyou'
+      setSubmitted(true)
     } catch (error) {
       setSubmitError(error.message || 'Something went wrong. Please try again.')
     } finally {
