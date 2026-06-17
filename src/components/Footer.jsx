@@ -125,8 +125,7 @@ export default function Footer() {
             <li className="footer-contact-item">
               <MapPin size={16} className="footer-contact-icon" />
               <p className="footer-contact-text">
-                3, 1st Floor, Philomena Hotel and Apartment,<br />
-                Arulanandha Nagar Main Rd,<br />
+                3, 1st Floor, Philomena Hotel and Apartment, Arulanandha Nagar Main Rd,<br />
                 Thanjavur – 613007
               </p>
             </li>

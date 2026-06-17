@@ -42,15 +42,19 @@ export default function PopupForm({ onClose }) {
     const nextErrors = {}
 
     if (!form.name.trim()) {
-      nextErrors.name = 'Name is required'
+      nextErrors.name = 'Full name is required'
+    } else if (form.name.trim().length < 2) {
+      nextErrors.name = 'Enter at least 2 characters'
     }
 
-    if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) {
-      nextErrors.phone = 'Enter a valid 10-digit number'
+    if (!form.phone.trim()) {
+      nextErrors.phone = 'Phone number is required'
+    } else if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) {
+      nextErrors.phone = 'Enter a valid 10-digit mobile number'
     }
 
     if (!form.concern) {
-      nextErrors.concern = 'Please select your concern'
+      nextErrors.concern = 'Please select your hair concern'
     }
 
     return nextErrors
@@ -128,7 +132,7 @@ export default function PopupForm({ onClose }) {
           ) : (
             <form onSubmit={handleSubmit} noValidate>
               <div className="popup-field">
-                <label className="popup-label">Full Name</label>
+                <label className="popup-label">Full Name <span style={{ color: '#C81C2E' }}>*</span></label>
                 <input
                   type="text"
                   className={`popup-input${errors.name ? ' error' : ''}`}
@@ -136,11 +140,11 @@ export default function PopupForm({ onClose }) {
                   value={form.name}
                   onChange={(event) => updateField('name', event.target.value)}
                 />
-                {errors.name ? <p className="popup-error">{errors.name}</p> : null}
+                {errors.name ? <p className="popup-error">⚠ {errors.name}</p> : null}
               </div>
 
               <div className="popup-field">
-                <label className="popup-label">Phone Number</label>
+                <label className="popup-label">Phone Number <span style={{ color: '#C81C2E' }}>*</span></label>
                 <input
                   type="tel"
                   className={`popup-input${errors.phone ? ' error' : ''}`}
@@ -148,11 +152,11 @@ export default function PopupForm({ onClose }) {
                   value={form.phone}
                   onChange={(event) => updateField('phone', event.target.value)}
                 />
-                {errors.phone ? <p className="popup-error">{errors.phone}</p> : null}
+                {errors.phone ? <p className="popup-error">⚠ {errors.phone}</p> : null}
               </div>
 
               <div className="popup-field">
-                <label className="popup-label">Hair Concern</label>
+                <label className="popup-label">Hair Concern <span style={{ color: '#C81C2E' }}>*</span></label>
                 <ConcernDropdown
                   error={errors.concern}
                   onChange={(value) => updateField('concern', value)}
@@ -161,7 +165,7 @@ export default function PopupForm({ onClose }) {
                   value={form.concern}
                   variant="popup"
                 />
-                {errors.concern ? <p className="popup-error">{errors.concern}</p> : null}
+                {errors.concern ? <p className="popup-error">⚠ {errors.concern}</p> : null}
               </div>
 
               <button

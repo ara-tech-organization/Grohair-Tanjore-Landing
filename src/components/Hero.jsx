@@ -37,15 +37,19 @@ export default function Hero({ onBookClick }) {
     const nextErrors = {}
 
     if (!form.name.trim()) {
-      nextErrors.name = 'Name is required'
+      nextErrors.name = 'Full name is required'
+    } else if (form.name.trim().length < 2) {
+      nextErrors.name = 'Enter at least 2 characters'
     }
 
-    if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) {
-      nextErrors.phone = 'Valid 10-digit number needed'
+    if (!form.phone.trim()) {
+      nextErrors.phone = 'Phone number is required'
+    } else if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) {
+      nextErrors.phone = 'Enter a valid 10-digit mobile number'
     }
 
     if (!form.concern) {
-      nextErrors.concern = 'Please select a concern'
+      nextErrors.concern = 'Please select your hair concern'
     }
 
     return nextErrors
@@ -377,35 +381,35 @@ export default function Hero({ onBookClick }) {
                   <form onSubmit={handleSubmit} noValidate>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                       <div>
-                        <label className="form-label">Full Name *</label>
+                        <label className="form-label">Full Name <span style={{ color: '#C81C2E' }}>*</span></label>
                         <input
                           type="text"
-                          className="form-input"
+                          className={`form-input${errors.name ? ' error' : ''}`}
                           placeholder="Your full name"
                           value={form.name}
                           onChange={(event) => updateField('name', event.target.value)}
                         />
                         {errors.name ? (
-                          <p style={{ fontSize: 12, color: '#C81C2E', marginTop: 4 }}>{errors.name}</p>
+                          <p style={{ fontSize: 12, color: '#C81C2E', marginTop: 4 }}>⚠ {errors.name}</p>
                         ) : null}
                       </div>
 
                       <div>
-                        <label className="form-label">Mobile Number *</label>
+                        <label className="form-label">Mobile Number <span style={{ color: '#C81C2E' }}>*</span></label>
                         <input
                           type="tel"
-                          className="form-input"
+                          className={`form-input${errors.phone ? ' error' : ''}`}
                           placeholder="10-digit mobile number"
                           value={form.phone}
                           onChange={(event) => updateField('phone', event.target.value)}
                         />
                         {errors.phone ? (
-                          <p style={{ fontSize: 12, color: '#C81C2E', marginTop: 4 }}>{errors.phone}</p>
+                          <p style={{ fontSize: 12, color: '#C81C2E', marginTop: 4 }}>⚠ {errors.phone}</p>
                         ) : null}
                       </div>
 
                       <div>
-                        <label className="form-label">Hair Concern *</label>
+                        <label className="form-label">Hair Concern <span style={{ color: '#C81C2E' }}>*</span></label>
                         <ConcernDropdown
                           options={CONCERNS}
                           value={form.concern}
@@ -414,7 +418,7 @@ export default function Hero({ onBookClick }) {
                           onChange={(value) => updateField('concern', value)}
                         />
                         {errors.concern ? (
-                          <p style={{ fontSize: 12, color: '#C81C2E', marginTop: 4 }}>{errors.concern}</p>
+                          <p style={{ fontSize: 12, color: '#C81C2E', marginTop: 4 }}>⚠ {errors.concern}</p>
                         ) : null}
                       </div>
 
