@@ -4,7 +4,7 @@ import Logo from '../assets/Header.png'
 export default function ThankYou() {
   const goHome = (e) => {
     e.preventDefault()
-    window.location.href = '/Grohair-Tanjore-Landing/'
+    window.location.href = '/'
   }
 
   return (
@@ -107,7 +107,7 @@ export default function ThankYou() {
 
         {/* Back to Home */}
         <a
-          href="/Grohair-Tanjore-Landing/"
+          href="/"
           onClick={goHome}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
