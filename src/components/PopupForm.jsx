@@ -71,6 +71,7 @@ export default function PopupForm({ onClose }) {
     try {
       await submitAppointmentLead(form)
       setSubmitted(true)
+      window.history.pushState({}, '', '/Grohair-Tanjore-Landing/thankyou')
     } catch (error) {
       setSubmitError(error.message || 'Something went wrong. Please try again.')
     } finally {
@@ -114,6 +115,7 @@ export default function PopupForm({ onClose }) {
                 href="#home"
                 onClick={(e) => {
                   e.preventDefault()
+                  window.history.pushState({}, '', '/Grohair-Tanjore-Landing/')
                   onClose()
                   document.querySelector('#home').scrollIntoView({ behavior: 'smooth' })
                 }}
