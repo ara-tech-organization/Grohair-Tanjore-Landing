@@ -2,6 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Restore path after GitHub Pages 404 redirect
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          });
+          window.history.replaceState(
+            null, null,
+            l.pathname.slice(0, -1) + decoded[0] +
+            (decoded[1] ? '?' + decoded[1] : '') + l.hash
+          );
+        }
+      }(window.location));
+    </script>
     <link rel="icon" type="image/png" href="/Grohair-Tanjore-Landing/hair.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Best Hair Treatment Clinic in Thanjavur | Advanced Grohair &amp; Gloskin</title>
@@ -9,8 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/Grohair-Tanjore-Landing/assets/index-BuqzMBPO.js"></script>
-    <link rel="stylesheet" crossorigin href="/Grohair-Tanjore-Landing/assets/index-BSWg3NsZ.css">
+    <script type="module" crossorigin src="/Grohair-Tanjore-Landing/assets/index-CELbBD1c.js"></script>
+    <link rel="stylesheet" crossorigin href="/Grohair-Tanjore-Landing/assets/index-D7vEhxa4.css">
   </head>
   <body>
     <div id="root"></div>
