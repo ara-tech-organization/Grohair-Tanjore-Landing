@@ -71,7 +71,7 @@ export default function Hero({ onBookClick }) {
 
     try {
       await submitAppointmentLead(form)
-      setSubmitted(true)
+      window.location.href = '/Grohair-Tanjore-Landing/thankyou'
     } catch (error) {
       setSubmitError(error.message || 'Something went wrong. Please try again.')
     } finally {

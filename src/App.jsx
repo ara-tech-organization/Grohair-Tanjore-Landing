@@ -10,14 +10,20 @@ import Treatments from './components/Treatments'
 import Testimonials from './components/Testimonials'
 import FAQs from './components/FAQs'
 import FinalCTA from './components/FinalCTA'
+import ThankYou from './components/ThankYou'
+
+const isThankYouPage = window.location.pathname.replace(/\/$/, '').endsWith('/thankyou')
 
 export default function App() {
   const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
+    if (isThankYouPage) return
     const timer = setTimeout(() => setShowPopup(true), 2000)
     return () => clearTimeout(timer)
   }, [])
+
+  if (isThankYouPage) return <ThankYou />
 
   const book = () => setShowPopup(true)
 
