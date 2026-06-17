@@ -110,13 +110,18 @@ export default function PopupForm({ onClose }) {
               </div>
               <h3>Thank You!</h3>
               <p>Our team will contact you shortly to confirm your consultation.</p>
-              <button
-                onClick={onClose}
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault()
+                  onClose()
+                  document.querySelector('#home').scrollIntoView({ behavior: 'smooth' })
+                }}
                 className="popup-submit"
-                style={{ maxWidth: 200, margin: '0 auto' }}
+                style={{ maxWidth: 200, margin: '0 auto', textDecoration: 'none', display: 'block', textAlign: 'center' }}
               >
-                Done
-              </button>
+                Back to Home
+              </a>
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>

@@ -140,7 +140,7 @@ export default function Treatments({ onBookClick }) {
         <div className="treatments-header reveal">
           <div className="treatments-badge">Our Treatments</div>
           <h2 className="treatments-title">
-            Advanced Hair Treatments <span>in Thanjavur</span>
+            Our Hair Treatments <span>in Thanjavur</span>
           </h2>
           <p className="treatments-subtitle">
             From non-surgical regrowth to advanced transplants — every treatment is tailored to your specific hair concern.

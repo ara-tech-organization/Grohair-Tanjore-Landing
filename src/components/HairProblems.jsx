@@ -47,7 +47,7 @@ const PROBLEMS = [
   },
   {
     Icon: Layers,
-    title: 'Scalp Problems & Dandruff',
+    title: 'Scalp Problems & Scalp Treatment',
     desc: 'Dandruff, inflammation, seborrheic dermatitis, and other scalp conditions that accelerate hair loss.',
     tag: null,
   },

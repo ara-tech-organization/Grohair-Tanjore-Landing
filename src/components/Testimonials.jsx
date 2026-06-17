@@ -287,7 +287,7 @@ export default function Testimonials({ onBookClick }) {
               event.currentTarget.style.boxShadow = '0 4px 18px rgba(200,28,46,0.32)'
             }}
           >
-            Join Our Happy Patients
+            Book Your Free Consultation
             <ChevronRight size={16} />
           </button>
           <p className="testimonials-cta-note">

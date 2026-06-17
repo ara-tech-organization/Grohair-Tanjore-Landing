@@ -35,8 +35,7 @@ export default function FinalCTA({ onBookClick }) {
             </div>
 
             <h2 className="finalcta-heading">
-              Take the First Step<br />
-              <span>Towards Better Hair</span>
+              Take the First Step Today
             </h2>
 
             <p className="finalcta-subtext">

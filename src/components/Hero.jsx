@@ -309,6 +309,7 @@ export default function Hero({ onBookClick }) {
                 background: '#fff',
                 borderRadius: 20,
                 boxShadow: '0 32px 80px rgba(0,0,0,0.35)',
+                overflow: 'hidden',
               }}
             >
               <div style={{ background: 'linear-gradient(90deg,#C81C2E,#9E0F20)', padding: '20px 24px' }}>
@@ -348,9 +349,27 @@ export default function Hero({ onBookClick }) {
                     >
                       We&apos;ll Call You Soon!
                     </h4>
-                    <p style={{ fontSize: 14, color: '#6B7280' }}>
+                    <p style={{ fontSize: 14, color: '#6B7280', marginBottom: 20 }}>
                       Our hair specialist will contact you shortly to schedule your free consultation.
                     </p>
+                    <a
+                      href="#home"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        document.querySelector('#home').scrollIntoView({ behavior: 'smooth' })
+                      }}
+                      className="btn-primary"
+                      style={{
+                        padding: '12px 28px',
+                        fontSize: 14,
+                        justifyContent: 'center',
+                        margin: '0 auto',
+                        display: 'inline-flex',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      Back to Home
+                    </a>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate>
