@@ -83,7 +83,7 @@ export default function Hero({ onBookClick }) {
     <section
       id="home"
       style={{
-        background: 'linear-gradient(135deg, #C81C2E 0%, #A01523 55%, #6A0812 100%)',
+        background: '#C81C2E',
         fontFamily: 'Poppins, sans-serif',
         position: 'relative',
         overflow: 'hidden',
